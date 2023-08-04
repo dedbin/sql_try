@@ -17,7 +17,7 @@ tconv = lambda x: time.strftime("%H:%M:%S %d.%m.%Y", time.localtime(x))
 
 @bot.message_handler(commands=['start'])
 def start(message: telebot.types.Message):
-    bot.send_message(message.chat.id, 'привет, {0.first_name}!'.format(message.from_user))
+    bot.send_message(message.chat.id, f'привет, {message.from_user.first_name}!')
     bot.send_message(message.chat.id, 'начал создание базы данных')
     try:
         with sq.connect('test.db') as con:
@@ -32,7 +32,7 @@ def start(message: telebot.types.Message):
             ''')
         bot.send_message(message.chat.id, 'база данных создана')
     except Exception as e:
-        bot.send_message(message.chat.id, 'ошибка создания базы данных: {0}'.format(e))
+        bot.send_message(message.chat.id, f'ошибка создания базы данных: {e}')
         print(e)
 
 
@@ -46,7 +46,7 @@ def clear(message: telebot.types.Message):
             ''')
         bot.send_message(message.chat.id, 'база данных очищена')
     except Exception as e:
-        bot.send_message(message.chat.id, 'ошибка очистки базы данных: {0}'.format(e))
+        bot.send_message(message.chat.id, f'ошибка создания базы данных: {e}')
 
 
 @bot.message_handler(commands=['clear_user'])
@@ -59,7 +59,7 @@ def clear_user(message: telebot.types.Message):
                         ''')
         bot.send_message(message.from_user.id, 'пользователь удален из базы данных')
     except Exception as e:
-        bot.send_message(message.from_user.id, 'ошибка удаления пользователя: {0}'.format(e))
+        bot.send_message(message.from_user.id, f'ошибка создания базы данных: {e}')
 
 
 @bot.message_handler(commands=['add'])
@@ -78,7 +78,7 @@ def add_data(message: telebot.types.Message):
             ''')
         bot.send_message(message.chat.id, 'данные добавлены')
     except Exception as e:
-        bot.send_message(message.chat.id, 'ошибка добавления данных: {0}'.format(e))
+        bot.send_message(message.chat.id, f'ошибка создания базы данных: {e}')
 
 
 @bot.message_handler(commands=['print_db'])
@@ -91,7 +91,7 @@ def print_db(message: telebot.types.Message):
             ''')
         bot.send_message(message.chat.id, f'{cur.fetchall()}')
     except Exception as e:
-        bot.send_message(message.chat.id, 'ошибка вывода базы данных: {0}'.format(e))
+        bot.send_message(message.chat.id, f'ошибка создания базы данных: {e}')
 
 
 @bot.message_handler(commands=['print_user'])
@@ -104,7 +104,7 @@ def print_user(message: telebot.types.Message):
             ''')
         bot.send_message(message.chat.id, f'{cur.fetchall()}')
     except Exception as e:
-        bot.send_message(message.chat.id, 'ошибка вывода пользователя: {0}'.format(e))
+        bot.send_message(message.chat.id, f'ошибка создания базы данных: {e}')
 
 
 bot.polling(non_stop=True)
