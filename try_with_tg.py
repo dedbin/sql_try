@@ -1,8 +1,9 @@
 import telebot
 import sqlite3 as sq
 import time
+from token import TRY_WITH_SQL_TG_TOKEN
 
-bot = telebot.TeleBot('5887432555:AAECgVxzikZXu6pk9avMH9lAYPPH1i2ccsU')
+bot = telebot.TeleBot(TRY_WITH_SQL_TG_TOKEN)
 bot.set_my_commands([
     telebot.types.BotCommand("/start", "в самое начало"),
     telebot.types.BotCommand("/clear", "очистить полностью базу данных"),
@@ -11,7 +12,6 @@ bot.set_my_commands([
     telebot.types.BotCommand("/print_db", "вывести базу данных"),
     telebot.types.BotCommand("/print_user", "вывести данные пользователя"),
 ])
-
 tconv = lambda x: time.strftime("%H:%M:%S %d.%m.%Y", time.localtime(x))
 
 
